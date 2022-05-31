@@ -21,7 +21,7 @@ from helper_func import encode
     )
 )
 async def channel_post(client: Client, message: Message):
-    reply_text = await message.reply_text("<code>Tunggu Sebentar...</code>", quote=True)
+    reply_text = await message.reply_text("<code>Gönderi yükleniyor...</code>", quote=True)
     try:
         post_message = await message.copy(
             chat_id=client.db_channel.id, disable_notification=True
@@ -33,7 +33,7 @@ async def channel_post(client: Client, message: Message):
         )
     except Exception as e:
         print(e)
-        await reply_text.edit_text("<b>Telah Terjadi Error...</b>")
+        await reply_text.edit_text("<b>Gönderi yüklenemedi</b>")
         return
     converted_id = post_message.message_id * abs(client.db_channel.id)
     string = f"get-{converted_id}"
@@ -44,7 +44,7 @@ async def channel_post(client: Client, message: Message):
         [
             [
                 InlineKeyboardButton(
-                    "🔁 Share Link", url=f"https://telegram.me/share/url?url={link}"
+                    "Gönderi Yükleniyor", url=f"https://telegram.me/share/url?url={link}"
                 )
             ]
         ]
@@ -76,7 +76,7 @@ async def new_post(client: Client, message: Message):
         [
             [
                 InlineKeyboardButton(
-                    "🔁 Share Link", url=f"https://telegram.me/share/url?url={link}"
+                    "Gönderiyi Paylaş", url=f"https://telegram.me/share/url?url={link}"
                 )
             ]
         ]
